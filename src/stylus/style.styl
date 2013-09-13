@@ -1,0 +1,204 @@
+// variables and imports {{{
+
+@import '_colors'
+@import '_pygments'
+@import '_vendor'
+
+// }}} variables and imports
+
+// dynamic layout {{{
+
+@media (min-width: 900px)
+  footer ul
+    column-count 2
+    column-gap 30px
+
+  #posts-header
+    padding 0 15px
+
+  //FIXME enable when you write more posts
+
+  // #posts
+  //   column-count 3
+  //   column-gap 30px
+
+  #content, #posts
+    padding 0 25px
+
+@media (max-width: 900px)
+  footer ul
+    column-count 2
+    column-gap 30px
+
+  #posts-header
+    padding 0 10px
+
+  //FIXME enable when you write more posts
+
+  // #posts
+  //   column-count 2
+  //   column-gap 30px
+
+  #content, #posts, #posts-header
+    padding 0 20px
+
+@media (max-width: 700px)
+  footer ul
+    column-count 1
+    column-gap 30px
+
+  //FIXME enable when you write more posts
+
+  // #posts
+  //   column-count 1
+  //   column-gap 30px
+
+  #content, #posts, #posts-header
+    padding 0 10px
+
+// }}} dynamic layout
+
+// generic {{{
+
+body
+  line-height 1.5em
+  margin 0 auto
+  max-width 1000px
+  position relative
+
+h1, h2, h3, h4
+  line-height 1.3em
+
+li
+  margin-top 5px
+  margin-bottom 20px
+  overflow visible
+
+li:last-of-type
+  margin-bottom 0
+
+a
+  outline none
+  padding 5px 0
+  text-decoration none
+  transition 0.2s ease background-color
+
+footer
+  margin 0 auto 25px
+  max-width 900px
+
+  ul
+    margin 0
+    padding 0
+    text-align center
+
+// }}} generic
+
+// added by javascript so the background color isn't transitioned on page load
+// (the background color might be changed on page load and that shouldn't be
+// transitioned)
+.transition-background-color
+  transition 0.2s ease background-color
+
+#posts-header
+  margin 15px auto 30px
+  font-size 1.5em
+
+#posts
+  margin-bottom 30px
+
+  li a
+    line-height 1.6em
+
+#posts, footer ul
+  column-rule 1px dotted
+  list-style none
+
+#content
+  margin-bottom 15px
+
+  li
+    margin-bottom 10px
+
+#theme-toggle
+  cursor pointer
+  padding 5px
+  position absolute
+  right 15px
+  top 0
+
+.date
+  display block
+  font-size 0.75em
+
+.highlight
+  overflow-x auto
+
+// solarized colorscheme application {{{
+
+// generic colors (these shouldn't need to change)
+#posts
+  li a
+    color orange
+
+  li:nth-child(odd) a
+    color yellow
+
+#content a
+  color magenta
+
+.date
+  color cyan
+
+footer
+  li
+    color blue
+
+  li:nth-child(odd)
+    color violet
+
+  li a
+    color green
+
+  li:nth-child(odd) a
+    color orange
+
+// solarized light (the default)
+body
+  background-color base3
+  color base00
+
+  #theme-toggle:hover
+  #theme-toggle:active
+  #theme-toggle:focus
+  a:hover
+  a:active
+  a:focus
+    background-color base2
+
+  h1, #theme-toggle
+    color base01
+
+  ul
+    column-rule-color base01
+
+// overrides from the above colors when using the dark variant
+body.dark
+  background-color base03
+  color base0
+
+  #theme-toggle:hover
+  #theme-toggle:active
+  #theme-toggle:focus
+  a:hover
+  a:active
+  a:focus
+    background-color base02
+
+  h1, #theme-toggle
+    color base1
+
+  ul
+    column-rule-color base1
+
+// }}} solarized colorscheme application

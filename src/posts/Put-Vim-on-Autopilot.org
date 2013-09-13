@@ -1,0 +1,94 @@
+I'm always looking for ways make development easier, and [[https://speakerdeck.com/holman/unsucking-your-teams-development-environment][making computers do the
+work]] is my favorite way of getting to the fun stuff: development.  Though the
+following won't do your job for you, here are some tips for getting vim to do
+some of the more tedious stuff for you.
+* Syntax highlighting and automatic indentation
+   Vim will color and indent the code you type for over 500 different filetypes
+   out of the box! Even though vim does so much on its own, it's good to know
+   how to install support for a new filetype in case the need arises.  First,
+   make sure you have [[http://vimdoc.sourceforge.net/htmldoc/syntax.html#:syntax-on][syntax highlighting enabled]] in your ~/.vimrc:
+    #+BEGIN_SRC vim
+syntax on
+    #+END_SRC
+
+   And filetype-specific [[http://vimdoc.sourceforge.net/htmldoc/filetype.html#:filetype-indent-on][indentation]] and [[http://vimdoc.sourceforge.net/htmldoc/filetype.html#:filetype-plugin-on][plugins]] enabled:
+    #+BEGIN_SRC vim
+filetype plugin indent on
+    #+END_SRC
+
+   For most filetypes, this is enough, but for newer ones, you might need to add
+   the syntax files and indentation files yourself (at least until someone adds
+   them to vim).  For instance, if you wanted vim to highlight and automatically
+   indent [[http://slim-lang.com/][slim]] files, you could add the [[https://github.com/slim-template/vim-slim][vim-slim]] plugin to your ~/.vim/
+   directory (by extracting the plugin's files to the corresponding folders in
+   ~/.vim/; or by using a plugin manager plugin, like [[https://github.com/sunaku/vim-unbundle][unbundle]], [[https://github.com/tpope/vim-pathogen][pathogen]], or
+   [[https://github.com/gmarik/vundle][vundle]]).
+* No-configuration plugins
+   There are plenty of vim plugins that enhance vim in some way without you
+   having to do anything beyond installing them.
+   Here are a few:
+   - [[https://github.com/scrooloose/syntastic][syntastic]]: automatic syntax checking
+     - Automatically checks the syntax of files when you save them.
+     - It depends on external syntax checkers, so make sure
+       you have any desired syntax checkers/compilers/linters installed before
+       using it (see [[https://github.com/scrooloose/syntastic#faq][the FAQ]] for more info).
+   - [[https://github.com/sickill/vim-pasta][pasta]]: enhances [[http://vimdoc.sourceforge.net/htmldoc/change.html#p][the default paste command]]
+     - Makes the default paste command indent the text you're pasting
+     - This is similar to the builtin `]p` command ([[http://vimdoc.sourceforge.net/htmldoc/change.html#%5Dp][docs]]), but adds some
+       useful differences.
+   - [[https://github.com/tpope/vim-endwise][endwise]]: completes block statements in vimscript, ruby, and more.
+     - When you type 'do' in ruby (and other languages) and hit enter,
+       this plugin adds an 'end' on the next line.
+   - [[https://github.com/tpope/vim-surround][surround]]: Easy handling of surrounding quotes, brackets, tags, etc
+     - Allows you to change, delete, and add surrounding quotes, xml
+       tags, etc.
+   - [[https://github.com/tpope/vim-rsi][rsi]] aka "Readline style insertion"
+     - More [[http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html#Introduction][readline]]-like keybindings for vim
+   - [[https://github.com/tpope/vim-repeat][repeat]]: Repeat some plugin actions
+     - Allows plugins to repeat their actions using the builtin
+       [[http://vimdoc.sourceforge.net/htmldoc/repeat.html#.][.]] command.
+     - Commands from plugins like [[https://github.com/tpope/vim-surround][vim-surround]] can't always be
+       repeated with the builtin . command.  This plugin provides an interface
+       for those plugins to add support for the repeat command.
+       - Note: Additional plugins aren't supported by default, some
+         plugins that allow their commands to be repeated with [[https://github.com/tpope/vim-repeat][repeat]]
+         are described in [[https://github.com/tpope/vim-repeat#repeatvim][the README]].
+   - [[https://github.com/Lokaltog/powerline][powerline]] and [[https://github.com/bling/vim-airline][airline]]: enhanced status bar for vim
+     - Enhances the default status bar in vim.
+     - Note: to show the statusbar at all times, add [[http://vimdoc.sourceforge.net/htmldoc/options.html#'laststatus'][set laststatus=2]]
+       to your ~/.vimrc; by default it will be shown when you have more than one
+       window open.
+   - [[https://github.com/amdt/vim-niji][niji]]: Highlights matching parenthesis and braces
+     - When you're editing code with many matching parens/braces it
+       can be hard to read which parens/braces match up. While indentation helps
+       a lot with this, sometimes it's useful to have a few extra colors.
+   - [[https://github.com/tpope/vim-rails][rails]] and [[https://github.com/tpope/vim-rake][rake]] plugins: makes editing ruby/rails projects easier
+     - In addition to adding commands like [[https://github.com/tpope/vim-rails/blob/bdc32389e7053c608a65f870c6c8f5e1210432a7/doc/rails.txt#L215-L237][:Econtroller]] that ease moving around
+       in projects, these plugins enhance the builtin [[http://vimdoc.sourceforge.net/htmldoc/editing.html#gf][gf]] command to work better
+       in those projects.
+   - [[https://bitbucket.org/kovisoft/paredit][paredit]]: Structured editing parenthesies/quotes/brackets
+     - This is a port of the great [[http://www.emacswiki.org/emacs/ParEdit][Emacs ParEdit]] plugin
+     - Helps you keep your parens/etc matched when editing so you can focus on
+       other things (like what you're building).
+   - [[https://github.com/joshuarh/vim-stopsign][stopsign]]: insert debugging statements (shameless self-promotion)
+     - When you type `dbg`, this plugin replaces it with a line of code to stop
+       your program
+     - This is a little more useful than the [[http://vimdoc.sourceforge.net/htmldoc/map.html#:iabbrev][standard abbreviation command]]
+       because it's not filetype dependant (it will expand to different code
+       depending on the filetype)
+* Filetype specific settings
+  You might want some options set only on certian filetypes. By using
+  [[http://vimdoc.sourceforge.net/htmldoc/autocmd.html#:autocmd][autocommands]] and [[http://vimdoc.sourceforge.net/htmldoc/options.html#:setlocal][local options]] you can achieve this easily.  For example
+  here's a snippet from [[https://github.com/joshuarh/dotfiles/][my dotfiles]] that spell checks markdown files, git commit
+  messages, and cucumber files as they're edited:
+    #+BEGIN_SRC vim
+autocmd FileType markdown,gitcommit,cucumber setlocal spell " spellcheck these files by default
+    #+END_SRC
+* Automatic text formatting
+  For filetypes and comments where you know you're going to want some automatic
+  formatting (for instance markdown or orgmode files) you can change the
+  compound option [[http://vimdoc.sourceforge.net/htmldoc/options.html#'formatoptions'][formatoptions]]. All available options (described each by a
+  single character) are described [[http://vimdoc.sourceforge.net/htmldoc/change.html#fo-table][in the documentation]].
+* Conclusion
+  Though your editor still isn't an automatic code-producing robot, it should
+  feel a little more automated than before.

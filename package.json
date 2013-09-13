@@ -1,0 +1,12 @@
+{
+  "name": "joshuarh.github.com",
+  "version": "0.0.1",
+  "main": "index.html",
+  "devDependencies": {
+    "coffee-script": "latest",
+    "sqwish": "latest",
+    "stylus": "latest",
+    "uglify-js": "latest"
+  },
+  "author": "Josh Hoff"
+}
