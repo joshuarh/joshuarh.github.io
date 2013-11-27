@@ -58,7 +58,8 @@ index.html: src/posts/*.org src/partials/*.html
 		post_name="$$(basename $${post%.*})"; \
 		post_title="$$(echo $$post_name | tr '-' ' ')"; \
 		post_src="src/posts/$$post_name.org"; \
-		echo "<li><a href=\"/$$post\">$$post_title <span class=date>$$(date --reference=$$post_src +'%e %B')</span></a></li>" >> index.html; \
+		post_author_date="$$(git log --format=format:%ai -- $$post_src)"; \
+		echo "<li><a href=\"/$$post\">$$post_title <span class=date>$$(date --date=" $$post_author_date " +'%e %B, %Y')</span></a></li>" >> index.html; \
 	done
 
 	echo "</ul>" >> index.html
