@@ -146,69 +146,78 @@ footer
 
 // solarized colorscheme application {{{
 
-// generic colors (these shouldn't need to change)
-#posts
-  li a
-    color orange
+@media not print
+  @media (color)
+    // generic colors (these shouldn't need to change)
+    #posts
+      li a
+        color orange
 
-  li:nth-child(odd) a
-    color yellow
+      li:nth-child(odd) a
+        color yellow
 
-#content a
-  color magenta
+    #content a
+      color magenta
 
-.date
-  color cyan
+    .date
+      color cyan
 
-footer
-  li
-    color blue
+    footer
+      li
+        color blue
 
-  li:nth-child(odd)
-    color violet
+      li:nth-child(odd)
+        color violet
 
-  li a
-    color green
+      li a
+        color green
 
-  li:nth-child(odd) a
-    color orange
+      li:nth-child(odd) a
+        color orange
 
-// solarized light (the default)
-body
-  background-color base3
-  color base00
+    // solarized light (the default)
+    body
+      background-color base3
+      color base00
 
-  #theme-toggle:hover
-  #theme-toggle:active
-  #theme-toggle:focus
-  a:hover
-  a:active
-  a:focus
-    background-color base2
+      #theme-toggle:hover
+      #theme-toggle:active
+      #theme-toggle:focus
+      a:hover
+      a:active
+      a:focus
+        background-color base2
 
-  h1, #theme-toggle
-    color base01
+      h1, #theme-toggle
+        color base01
 
-  ul
-    column-rule-color base01
+      ul
+        column-rule-color base01
 
-// overrides from the above colors when using the dark variant
-body.dark
-  background-color base03
-  color base0
+    // overrides from the above colors when using the dark variant
+    body.dark
+      background-color base03
+      color base0
 
-  #theme-toggle:hover
-  #theme-toggle:active
-  #theme-toggle:focus
-  a:hover
-  a:active
-  a:focus
-    background-color base02
+      #theme-toggle:hover
+      #theme-toggle:active
+      #theme-toggle:focus
+      a:hover
+      a:active
+      a:focus
+        background-color base02
 
-  h1, #theme-toggle
-    color base1
+      h1, #theme-toggle
+        color base1
 
-  ul
-    column-rule-color base1
+      ul
+        column-rule-color base1
+
+@media (not color), print
+  a
+    text-decoration underline
+
+  #theme-toggle
+    display none
 
 // }}} solarized colorscheme application
