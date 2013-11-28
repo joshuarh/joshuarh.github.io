@@ -6,6 +6,42 @@
 
 // }}} variables and imports
 
+// generic {{{
+
+body
+  line-height 1.5em
+  margin 0 auto
+  max-width 1000px
+  position relative
+
+h1, h2, h3, h4
+  line-height 1.3em
+
+li
+  margin-top 5px
+  margin-bottom 20px
+  overflow visible
+
+li:last-of-type
+  margin-bottom 0
+
+a
+  outline none
+  padding 5px 0
+  text-decoration none
+  transition 0.2s ease background-color
+
+footer
+  margin 0 auto 25px
+  max-width 900px
+
+  ul
+    margin 0
+    padding 0
+    text-align center
+
+// }}} generic
+
 // dynamic layout {{{
 
 @media (min-width: 900px)
@@ -56,46 +92,11 @@
   #content, #posts, #posts-header
     padding 0 10px
 
-// }}} dynamic layout
-
-// generic {{{
-
-body
-  line-height 1.5em
-  margin 0 auto
-  max-width 1000px
-  position relative
-
-h1, h2, h3, h4
-  line-height 1.3em
-
 ol, ul
   padding-left 25px
 
-li
-  margin-top 5px
-  margin-bottom 20px
-  overflow visible
 
-li:last-of-type
-  margin-bottom 0
-
-a
-  outline none
-  padding 5px 0
-  text-decoration none
-  transition 0.2s ease background-color
-
-footer
-  margin 0 auto 25px
-  max-width 900px
-
-  ul
-    margin 0
-    padding 0
-    text-align center
-
-// }}} generic
+// }}} dynamic layout
 
 // added by javascript so the background color isn't transitioned on page load
 // (the background color might be changed on page load and that shouldn't be
