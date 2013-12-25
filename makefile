@@ -44,6 +44,7 @@ posts/%.html: src/posts/%.org
 		--kill
 
 	vim -s scripts/pygmentize-all-code-blocks.vim "$(PROJECT_DIR)/$@"
+	vim -s scripts/asciinema-embed.vim "$(PROJECT_DIR)/$@"
 
 	cat "$(PROJECT_DIR)/src/partials/post_end.html" \
 			"$(PROJECT_DIR)/src/partials/footer.html" \

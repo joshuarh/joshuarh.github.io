@@ -40,4 +40,4 @@ cat
 @q
 q
 @q
-:wq
+:xit
