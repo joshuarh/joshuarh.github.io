@@ -43,8 +43,15 @@ posts/%.html: src/posts/%.org
 		--eval "(write-file \"$(PROJECT_DIR)/$@\")" \
 		--kill
 
-	vim -s scripts/pygmentize-all-code-blocks.vim "$(PROJECT_DIR)/$@"
-	vim -s scripts/asciinema-embed.vim "$(PROJECT_DIR)/$@"
+	# highlight code blocks if there are any
+	if [ -n "$$(grep --only-matching "\<pre class=.src src-" "$(PROJECT_DIR)/$@")" ]; then \
+		vim -s scripts/pygmentize-all-code-blocks.vim "$(PROJECT_DIR)/$@"; \
+	fi
+
+	# add asciinema embed scripts if there are any occurences of 'asciicast:number'
+	if [ -n "$$(grep --only-matching "asciicast\:[[:digit:]]\+" "$(PROJECT_DIR)/$@")" ]; then \
+		vim -s scripts/asciinema-embed.vim "$(PROJECT_DIR)/$@"; \
+	fi
 
 	cat "$(PROJECT_DIR)/src/partials/post_end.html" \
 			"$(PROJECT_DIR)/src/partials/footer.html" \
