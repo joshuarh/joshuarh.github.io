@@ -70,7 +70,7 @@ filetype plugin indent on
      - This is a port of the great [[http://www.emacswiki.org/emacs/ParEdit][Emacs ParEdit]] plugin
      - Helps you keep your parens/etc matched when editing so you can focus on
        other things (like what you're building).
-   - [[https://github.com/joshuarh/vim-stopsign][stopsign]]: insert debugging statements (shameless self-promotion)
+   - [[https://github.com/losingkeys/vim-stopsign][stopsign]]: insert debugging statements (shameless self-promotion)
      - When you type `dbg`, this plugin replaces it with a line of code to stop
        your program
      - This is a little more useful than the [[http://vimdoc.sourceforge.net/htmldoc/map.html#:iabbrev][standard abbreviation command]]
@@ -79,7 +79,7 @@ filetype plugin indent on
 * Filetype specific settings
   You might want some options set only on certian filetypes. By using
   [[http://vimdoc.sourceforge.net/htmldoc/autocmd.html#:autocmd][autocommands]] and [[http://vimdoc.sourceforge.net/htmldoc/options.html#:setlocal][local options]] you can achieve this easily.  For example
-  here's a snippet from [[https://github.com/joshuarh/dotfiles/][my dotfiles]] that spell checks markdown files, git commit
+  here's a snippet from [[https://github.com/losingkeys/dotfiles/][my dotfiles]] that spell checks markdown files, git commit
   messages, and cucumber files as they're edited:
     #+BEGIN_SRC vim
 autocmd FileType markdown,gitcommit,cucumber setlocal spell " spellcheck these files by default
