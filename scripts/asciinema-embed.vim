@@ -4,7 +4,7 @@ qq
 /asciicast:\d\+
 df:
 diw
-i<script src=http://asciinema.org/a/".js id=asciicast-" async></script>
+i<script src=https://asciinema.org/a/".js id=asciicast-" async></script>
 @q
 q
 @q
