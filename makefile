@@ -48,11 +48,6 @@ posts/%.html: src/posts/%.org
 		vim -s scripts/pygmentize-all-code-blocks.vim "$(PROJECT_DIR)/$@"; \
 	fi
 
-	# add asciinema embed scripts if there are any occurences of 'asciicast:number'
-	if [ -n "$$(grep --only-matching "asciicast\:[[:digit:]]\+" "$(PROJECT_DIR)/$@")" ]; then \
-		vim -s scripts/asciinema-embed.vim "$(PROJECT_DIR)/$@"; \
-	fi
-
 	cat "$(PROJECT_DIR)/src/partials/post_end.html" \
 			"$(PROJECT_DIR)/src/partials/footer.html" \
 			"$(PROJECT_DIR)/src/partials/end.html" >> '$@'
