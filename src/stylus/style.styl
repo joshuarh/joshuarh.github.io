@@ -127,22 +127,31 @@ footer
 #content
   margin-bottom 15px
 
-  // the last link on each post is the back link
-  a:last-of-type
-    display inline-block
-
   li
     margin-bottom 10px
 
-#theme-toggle
+.back-to-home
+  display inline-block
+
+.control-link
   cursor pointer
   padding 5px
   position absolute
-  right 15px
   top 0
+
+#theme-toggle
+  right 15px
+
+#download-links-toggle
+  right 60px
+
+#return-to-home
+  right 90px
 
 .date
   display block
+
+.date, .post-source-link, .post-pdf-link
   font-size 0.75em
 
 .highlight
@@ -150,6 +159,14 @@ footer
 
 iframe[id^=asciicast-iframe]
   margin 0 auto !important
+
+.post-download-link
+  display none
+  margin-right 10px
+
+.show-download-links
+  .post-download-link
+    display inline-block
 
 // solarized colorscheme application {{{
 
@@ -187,15 +204,15 @@ iframe[id^=asciicast-iframe]
       background-color base3
       color base00
 
-      #theme-toggle:hover
-      #theme-toggle:active
-      #theme-toggle:focus
+      .control-link:hover
+      .control-link:active
+      .control-link:focus
       a:hover
       a:active
       a:focus
         background-color base2
 
-      h1, #theme-toggle
+      h1, .control-link
         color base01
 
       ul
@@ -206,15 +223,15 @@ iframe[id^=asciicast-iframe]
       background-color base03
       color base0
 
-      #theme-toggle:hover
-      #theme-toggle:active
-      #theme-toggle:focus
+      .control-link:hover
+      .control-link:active
+      .control-link:focus
       a:hover
       a:active
       a:focus
         background-color base02
 
-      h1, #theme-toggle
+      h1, .control-link
         color base1
 
       ul
@@ -224,7 +241,7 @@ iframe[id^=asciicast-iframe]
   a
     text-decoration underline
 
-  #theme-toggle
+  .control-link
     display none
 
 // }}} solarized colorscheme application

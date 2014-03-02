@@ -1,6 +1,5 @@
 SHELL = /bin/sh
 PATH += :./node_modules/.bin
-PROJECT_DIR = $$(pwd)
 COFFEESCRIPT = $(wildcard src/coffee/*.coffee)
 POST_SOURCES = $(wildcard src/posts/*.org)
 POST_TARGETS = $(addprefix posts/,$(notdir $(POST_SOURCES:.org=.html)))
@@ -25,32 +24,46 @@ js/app.js: node_modules $(COFFEESCRIPT)
 	coffee --join "$@" --compile $(COFFEESCRIPT)
 	uglifyjs "$@" --compress --mangle --output "$@"
 
+# also makes posts/%.pdf
 posts/%.html: src/posts/%.org
-	-mkdir -p "$(PROJECT_DIR)/posts/"
+	-mkdir -p "$(PWD)/posts/"
 
 	# this MUST be first, as it overwrites the compiled post
 	emacs --quick --no-window-system \
 		--eval "(require 'package)" \
 		--eval "(package-initialize)" \
 		--file '$<' \
+\
 		--eval "(setq org-export-with-toc nil)" \
 		--eval "(setq org-export-with-section-numbers nil)" \
-		--eval "(org-export-to-file 'html \"$(PROJECT_DIR)/$@\" nil nil nil t)" \
-		--eval "(find-file \"$(PROJECT_DIR)/$@\")" \
+		--eval "(setq org-export-with-date nil)" \
+		--eval "(org-export-to-file 'html \"$(PWD)/$@\" nil nil nil t)" \
+\
+		--eval "(cd \"$(PWD)/posts\")" \
+		--eval "(org-latex-export-to-pdf)" \
+\
+		--eval "(find-file \"$(PWD)/$@\")" \
+		--eval "(insert \"<section id=content>\")" \
 		--eval "(insert \"<h1>$(subst -, ,$(*F))</h1>\")" \
+		--eval "(insert \"<a href='/posts/$(*F).pdf' class='post-download-link post-pdf-link' alt='download as pdf' title='download as pdf'> ↓ pdf </a>\")" \
+		--eval "(insert \"<a href='/src/posts/$(*F).org' class='post-download-link post-source-link' alt='download as org-mode text' title='download as org-mode text'> ℹ source </a>\")" \
+\
 		--eval "(beginning-of-buffer)" \
-		--eval "(insert-file \"$(PROJECT_DIR)/src/partials/post_start.html\")" \
-		--eval "(write-file \"$(PROJECT_DIR)/$@\")" \
+		--eval "(insert-file \"$(PWD)/src/partials/post_start.html\")" \
+		--eval "(write-file \"$(PWD)/$@\")" \
 		--kill
 
+	# remove the extra LaTeX file that was used to make the PDF
+	-rm posts/$(*F).tex
+
 	# highlight code blocks if there are any
-	if [ -n "$$(grep --only-matching "\<pre class=.src src-" "$(PROJECT_DIR)/$@")" ]; then \
-		vim -s scripts/pygmentize-all-code-blocks.vim "$(PROJECT_DIR)/$@"; \
+	if [ -n "$$(grep --only-matching "\<pre class=.src src-" "$(PWD)/$@")" ]; then \
+		vim -s scripts/pygmentize-all-code-blocks.vim "$(PWD)/$@"; \
 	fi
 
-	cat "$(PROJECT_DIR)/src/partials/post_end.html" \
-			"$(PROJECT_DIR)/src/partials/footer.html" \
-			"$(PROJECT_DIR)/src/partials/end.html" >> '$@'
+	cat "$(PWD)/src/partials/post_end.html" \
+			"$(PWD)/src/partials/footer.html" \
+			"$(PWD)/src/partials/end.html" >> '$@'
 
 index.html: src/posts/*.org src/partials/*.html
 	cat src/partials/index_start.html > index.html
@@ -61,11 +74,16 @@ index.html: src/posts/*.org src/partials/*.html
 		post_name="$$(basename $${post%.*})"; \
 		post_title="$$(echo $$post_name | tr '-' ' ')"; \
 		post_src="src/posts/$$post_name.org"; \
+		post_pdf="posts/$$post_name.pdf"; \
 		post_author_date="$$(git log --format=format:%ai -- $$post_src | tail -1)"; \
-		echo "<li><a href=\"/$$post\">$$post_title <span class=date>$$(date --date=" $$post_author_date " +'%e %B, %Y')</span></a></li>" >> index.html; \
+		echo "<li><a href=\"/$$post\">$$post_title</a> \
+							<span class=date>$$(date --date=" $$post_author_date " +'%e %B, %Y')</span>\
+							<a href=\"/$$post_pdf\" class='post-download-link post-pdf-link' alt='download as pdf' title='download as pdf'> ↓ pdf </a> \
+							<a href=\"/$$post_src\" class='post-download-link post-source-link' alt='download as org-mode text' title='download as org-mode text'> ℹ source </a> \
+					</li>" >> index.html; \
 	done
 
 	echo "</ul>" >> index.html
 
 	cat src/partials/footer.html \
-	    src/partials/end.html >> index.html
+			src/partials/end.html >> index.html

@@ -1,28 +1,31 @@
-ALTERNATE_THEME_NAME = 'dark'
+# helper function to toggle a css class on an element
+toggle_class = (el, className) ->
+  classRegexp = new RegExp '\\b' + className + '\\b'
 
-using_alternate_theme = ->
-  localStorage.getItem('usingAlternateTheme') is 'true'
+  el.className =
+    if el.className.match classRegexp
+      el.className.replace classRegexp, ''
+    else
+      el.className + ' ' + className + ' '
 
-enable_alternate_theme = ->
-  document.body.className = "#{ALTERNATE_THEME_NAME} #{document.body.className}"
+toggle_light_dark = ->
+  toggle_class document.body, 'dark'
+  toggle_class document.body, 'light'
 
-disable_alternate_theme = ->
-  document.body.className = document.body.className.replace ALTERNATE_THEME_NAME, ''
-
-if using_alternate_theme() then enable_alternate_theme()
-
-# allow the background color to be transitioned, but only after loading the
-# file (because the class might be added by javascript, and we only want the
-# transition when the user clicks the button to switch themes)
 addEventListener 'load', ->
-  document.body.className = "transition-background-color #{document.body.className}"
+  if localStorage.getItem('use-alternate-theme') is 'true'
+    toggle_light_dark()
 
 document.getElementById('theme-toggle').addEventListener 'click', ->
-  usingAlternateTheme = using_alternate_theme()
+  # allow the background to fade. adding this the first time the theme toggle
+  # is clicked avoids transitioning on page load
+  unless document.body.className.match /\btransition-background-color\b/
+    document.body.className = document.body.className + ' transition-background-color '
 
-  if usingAlternateTheme
-    disable_alternate_theme()
-  else
-    enable_alternate_theme()
+  usingAlternateTheme = localStorage.getItem('use-alternate-theme') is 'true'
 
-  localStorage.setItem 'usingAlternateTheme', !usingAlternateTheme
+  localStorage.setItem 'use-alternate-theme', !usingAlternateTheme
+  toggle_light_dark()
+
+document.getElementById('download-links-toggle').addEventListener 'click', ->
+  toggle_class document.body, 'show-download-links'
