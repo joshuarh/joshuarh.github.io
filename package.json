@@ -4,7 +4,6 @@
   "main": "index.html",
   "devDependencies": {
     "coffee-script": "latest",
-    "html-minify": "latest",
     "sqwish": "latest",
     "stylus": "latest",
     "uglify-js": "latest"

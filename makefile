@@ -65,12 +65,10 @@ posts/%.html: src/posts/%.org
 			"$(PWD)/src/partials/footer.html" \
 			"$(PWD)/src/partials/end.html" >> '$@'
 
-	htmlminify "$(PWD)/$@" -o "$(PWD)/$@"
-
 index.html: src/posts/*.org src/partials/*.html
-	cat src/partials/index_start.html > "$@"
+	cat src/partials/index_start.html > index.html
 
-	echo "<ul id=posts>" >> "$@"
+	echo "<ul id=posts>" >> index.html
 
 	for post in $(POST_TARGETS); do \
 		post_name="$$(basename $${post%.*})"; \
@@ -82,12 +80,10 @@ index.html: src/posts/*.org src/partials/*.html
 							<span class=date>$$(date --date=" $$post_author_date " +'%e %B, %Y')</span>\
 							<a href=\"/$$post_pdf\" class='post-download-link post-pdf-link' alt='download as pdf' title='download as pdf'> ↓ pdf </a> \
 							<a href=\"/$$post_src\" class='post-download-link post-source-link' alt='download as org-mode text' title='download as org-mode text'> ℹ source </a> \
-					</li>" >> "$@"; \
+					</li>" >> index.html; \
 	done
 
-	echo "</ul>" >> "$@"
+	echo "</ul>" >> index.html
 
 	cat src/partials/footer.html \
-			src/partials/end.html >> "$@"
-
-	htmlminify "$@" -o "$@"
+			src/partials/end.html >> index.html

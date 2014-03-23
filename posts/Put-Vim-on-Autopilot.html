@@ -1,1 +1,255 @@
-<!doctype html><html><head><title>Josh's Blog</title><meta charset="utf-8"/><meta name="viewport" content="initial-scale=1"/><link href="/css/style.css" rel="stylesheet"/><link href="//openfontlibrary.org/face/lato-regular" rel="stylesheet"/></head><body class="light"><a href="/" id="return-to-home" class="control-link" alt="back to the list of posts" title="back to the list of posts" rel="contents">←</a> <a href="javascript:void(0)" id="download-links-toggle" class="control-link" alt="toggle download links" title="toggle download links">↓</a> <a href="javascript:void(0)" id="theme-toggle" class="control-link" alt="toggle light/dark themes" title="toggle light/dark themes">☼☽</a><section id="content"><h1>Put Vim on Autopilot</h1><a href="/posts/Put-Vim-on-Autopilot.pdf" class="post-download-link post-pdf-link" alt="download as pdf" title="download as pdf">↓ pdf</a><a href="/src/posts/Put-Vim-on-Autopilot.org" class="post-download-link post-source-link" alt="download as org-mode text" title="download as org-mode text">ℹ source</a><p>I'm always looking for ways make development easier, and <a href="https://speakerdeck.com/holman/unsucking-your-teams-development-environment">making computers do thework</a> is my favorite way of getting to the fun stuff: development. Though thefollowing won't do your job for you, here are some tips for getting vim to dosome of the more tedious stuff for you.</p><div id="outline-container-sec-1" class="outline-2"><h2 id="sec-1">Syntax highlighting and automatic indentation</h2><div class="outline-text-2" id="text-1"><p>Vim will color and indent the code you type for over 500 different filetypesout of the box! Even though vim does so much on its own, it's good to knowhow to install support for a new filetype in case the need arises. First,make sure you have <a href="http://vimdoc.sourceforge.net/htmldoc/syntax.html#:syntax-on">syntax highlighting enabled</a> in your ~/.vimrc:</p><div class="org-src-container"><div class="highlight"><pre> <span class="nb">syntax</span> <span class="k">on</span></pre></div></div><p>And filetype-specific <a href="http://vimdoc.sourceforge.net/htmldoc/filetype.html#:filetype-indent-on">indentation</a> and <a href="http://vimdoc.sourceforge.net/htmldoc/filetype.html#:filetype-plugin-on">plugins</a> enabled:</p><div class="org-src-container"><div class="highlight"><pre> <span class="k">filetype</span> plugin indent <span class="k">on</span></pre></div></div><p>For most filetypes, this is enough, but for newer ones, you might need to addthe syntax files and indentation files yourself (at least until someone addsthem to vim). For instance, if you wanted vim to highlight and automaticallyindent <a href="http://slim-lang.com/">slim</a> files, you could add the <a href="https://github.com/slim-template/vim-slim">vim-slim</a> plugin to your ~/.vim/directory (by extracting the plugin's files to the corresponding folders in~/.vim/; or by using a plugin manager plugin, like <a href="https://github.com/sunaku/vim-unbundle">unbundle</a>, <a href="https://github.com/tpope/vim-pathogen">pathogen</a>, or<a href="https://github.com/gmarik/vundle">vundle</a>).</p></div></div><div id="outline-container-sec-2" class="outline-2"><h2 id="sec-2">No-configuration plugins</h2><div class="outline-text-2" id="text-2"><p>There are plenty of vim plugins that enhance vim in some way without youhaving to do anything beyond installing them.Here are a few:</p><ul class="org-ul"><li><a href="https://github.com/scrooloose/syntastic">syntastic</a>: automatic syntax checking<ul class="org-ul"><li>Automatically checks the syntax of files when you save them.</li><li>It depends on external syntax checkers, so make sureyou have any desired syntax checkers/compilers/linters installed beforeusing it (see <a href="https://github.com/scrooloose/syntastic#faq">the FAQ</a> for more info).</li></ul></li><li><a href="https://github.com/sickill/vim-pasta">pasta</a>: enhances <a href="http://vimdoc.sourceforge.net/htmldoc/change.html#p">the default paste command</a><ul class="org-ul"><li>Makes the default paste command indent the text you're pasting</li><li>This is similar to the builtin `]p` command (<a href="http://vimdoc.sourceforge.net/htmldoc/change.html#]p">docs</a>), but adds someuseful differences.</li></ul></li><li><a href="https://github.com/tpope/vim-endwise">endwise</a>: completes block statements in vimscript, ruby, and more.<ul class="org-ul"><li>When you type 'do' in ruby (and other languages) and hit enter,this plugin adds an 'end' on the next line.</li></ul></li><li><a href="https://github.com/tpope/vim-surround">surround</a>: Easy handling of surrounding quotes, brackets, tags, etc<ul class="org-ul"><li>Allows you to change, delete, and add surrounding quotes, xmltags, etc.</li></ul></li><li><a href="https://github.com/tpope/vim-rsi">rsi</a> aka "Readline style insertion"<ul class="org-ul"><li>More <a href="http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html#Introduction">readline</a>-like keybindings for vim</li></ul></li><li><a href="https://github.com/tpope/vim-repeat">repeat</a>: Repeat some plugin actions<ul class="org-ul"><li>Allows plugins to repeat their actions using the builtin<a href="http://vimdoc.sourceforge.net/htmldoc/repeat.html#.">.</a> command.</li><li>Commands from plugins like <a href="https://github.com/tpope/vim-surround">vim-surround</a> can't always berepeated with the builtin . command. This plugin provides an interfacefor those plugins to add support for the repeat command.<ul class="org-ul"><li>Note: Additional plugins aren't supported by default, someplugins that allow their commands to be repeated with <a href="https://github.com/tpope/vim-repeat">repeat</a>are described in <a href="https://github.com/tpope/vim-repeat#repeatvim">the README</a>.</li></ul></li></ul></li><li><a href="https://github.com/Lokaltog/powerline">powerline</a> and <a href="https://github.com/bling/vim-airline">airline</a>: enhanced status bar for vim<ul class="org-ul"><li>Enhances the default status bar in vim.</li><li>Note: to show the statusbar at all times, add <a href="http://vimdoc.sourceforge.net/htmldoc/options.html#'laststatus'">set laststatus=2</a>to your ~/.vimrc; by default it will be shown when you have more than onewindow open.</li></ul></li><li><a href="https://github.com/amdt/vim-niji">niji</a>: Highlights matching parenthesis and braces<ul class="org-ul"><li>When you're editing code with many matching parens/braces itcan be hard to read which parens/braces match up. While indentation helpsa lot with this, sometimes it's useful to have a few extra colors.</li></ul></li><li><a href="https://github.com/tpope/vim-rails">rails</a> and <a href="https://github.com/tpope/vim-rake">rake</a> plugins: makes editing ruby/rails projects easier<ul class="org-ul"><li>In addition to adding commands like <a href="https://github.com/tpope/vim-rails/blob/bdc32389e7053c608a65f870c6c8f5e1210432a7/doc/rails.txt#L215-L237">:Econtroller</a> that ease moving aroundin projects, these plugins enhance the builtin <a href="http://vimdoc.sourceforge.net/htmldoc/editing.html#gf">gf</a> command to work betterin those projects.</li></ul></li><li><a href="https://bitbucket.org/kovisoft/paredit">paredit</a>: Structured editing parenthesies/quotes/brackets<ul class="org-ul"><li>This is a port of the great <a href="http://www.emacswiki.org/emacs/ParEdit">Emacs ParEdit</a> plugin</li><li>Helps you keep your parens/etc matched when editing so you can focus onother things (like what you're building).</li></ul></li><li><a href="https://github.com/losingkeys/vim-stopsign">stopsign</a>: insert debugging statements (shameless self-promotion)<ul class="org-ul"><li>When you type `dbg`, this plugin replaces it with a line of code to stopyour program</li><li>This is a little more useful than the <a href="http://vimdoc.sourceforge.net/htmldoc/map.html#:iabbrev">standard abbreviation command</a>because it's not filetype dependant (it will expand to different codedepending on the filetype)</li></ul></li></ul></div></div><div id="outline-container-sec-3" class="outline-2"><h2 id="sec-3">Filetype specific settings</h2><div class="outline-text-2" id="text-3"><p>You might want some options set only on certian filetypes. By using<a href="http://vimdoc.sourceforge.net/htmldoc/autocmd.html#:autocmd">autocommands</a> and <a href="http://vimdoc.sourceforge.net/htmldoc/options.html#:setlocal">local options</a> you can achieve this easily. For examplehere's a snippet from <a href="https://github.com/losingkeys/dotfiles/">my dotfiles</a> that spell checks markdown files, git commitmessages, and cucumber files as they're edited:</p><div class="org-src-container"><div class="highlight"><pre> autocmd <span class="nb">FileType</span> markdown<span class="p">,</span>gitcommit<span class="p">,</span>cucumber <span class="k">setlocal</span> <span class="k">spell</span> <span class="c">&quot; spellcheck these files by default</span></pre></div></div></div></div><div id="outline-container-sec-4" class="outline-2"><h2 id="sec-4">Automatic text formatting</h2><div class="outline-text-2" id="text-4"><p>For filetypes and comments where you know you're going to want some automaticformatting (for instance markdown or orgmode files) you can change thecompound option <a href="http://vimdoc.sourceforge.net/htmldoc/options.html#'formatoptions'">formatoptions</a>. All available options (described each by asingle character) are described <a href="http://vimdoc.sourceforge.net/htmldoc/change.html#fo-table">in the documentation</a>.</p></div></div><div id="outline-container-sec-5" class="outline-2"><h2 id="sec-5">Conclusion</h2><div class="outline-text-2" id="text-5"><p>Though your editor still isn't an automatic code-producing robot, it shouldfeel a little more automated than before.</p></div></div><a href="/" rel="contents" alt="back to the list of posts" title="back to the list of posts">← back to the list of posts</a></section><footer><ul><li>colors from <a href="http://ethanschoonover.com/solarized">solarized</a> by <a href="http://ethanschoonover.com/">Ethan Schoonover</a></li><li>code highlighted by <a href="http://pygments.org/">pygments</a></li><li>fonts from <a href="http://openfontlibrary.org/">open font library</a></li><li>i'm called <a href="https://github.com/losingkeys">losingkeys</a> on github</li><li>i'm called <a href="https://twitter.com/losingkeys">losingkeys</a> on twitter</li></ul></footer><script src="/js/app.js"></script></body></html>
+<!doctype html>
+<html>
+<head>
+  <title>Josh's Blog</title>
+  <meta charset=utf-8>
+  <meta name=viewport content=initial-scale=1>
+  <link href=/css/style.css rel=stylesheet>
+  <link href=//openfontlibrary.org/face/lato-regular rel=stylesheet>
+</head>
+
+<body class=light>
+
+  <a href=/
+    id=return-to-home
+    class=control-link
+    alt='back to the list of posts'
+    title='back to the list of posts'
+    rel=contents>
+    ←
+  </a>
+
+  <a href=javascript:void(0)
+    id=download-links-toggle
+    class=control-link
+    alt='toggle download links'
+    title='toggle download links'>
+    ↓
+  </a>
+
+  <a href=javascript:void(0)
+    id=theme-toggle
+    class=control-link
+    alt='toggle light/dark themes'
+    title='toggle light/dark themes'>
+    ☼☽
+  </a>
+
+<section id=content><h1>Put Vim on Autopilot</h1><a href='/posts/Put-Vim-on-Autopilot.pdf' class='post-download-link post-pdf-link' alt='download as pdf' title='download as pdf'> ↓ pdf </a><a href='/src/posts/Put-Vim-on-Autopilot.org' class='post-download-link post-source-link' alt='download as org-mode text' title='download as org-mode text'> ℹ source </a><p>
+I'm always looking for ways make development easier, and <a href="https://speakerdeck.com/holman/unsucking-your-teams-development-environment">making computers do the
+work</a> is my favorite way of getting to the fun stuff: development.  Though the
+following won't do your job for you, here are some tips for getting vim to do
+some of the more tedious stuff for you.
+</p>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Syntax highlighting and automatic indentation</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Vim will color and indent the code you type for over 500 different filetypes
+out of the box! Even though vim does so much on its own, it's good to know
+how to install support for a new filetype in case the need arises.  First,
+make sure you have <a href="http://vimdoc.sourceforge.net/htmldoc/syntax.html#:syntax-on">syntax highlighting enabled</a> in your ~/.vimrc:
+</p>
+<div class="org-src-container">
+
+
+
+<div class="highlight"><pre> <span class="nb">syntax</span> <span class="k">on</span></pre></div>
+
+
+</div>
+
+<p>
+And filetype-specific <a href="http://vimdoc.sourceforge.net/htmldoc/filetype.html#:filetype-indent-on">indentation</a> and <a href="http://vimdoc.sourceforge.net/htmldoc/filetype.html#:filetype-plugin-on">plugins</a> enabled:
+</p>
+<div class="org-src-container">
+
+
+
+<div class="highlight"><pre> <span class="k">filetype</span> plugin indent <span class="k">on</span></pre></div>
+
+
+</div>
+
+<p>
+For most filetypes, this is enough, but for newer ones, you might need to add
+the syntax files and indentation files yourself (at least until someone adds
+them to vim).  For instance, if you wanted vim to highlight and automatically
+indent <a href="http://slim-lang.com/">slim</a> files, you could add the <a href="https://github.com/slim-template/vim-slim">vim-slim</a> plugin to your ~/.vim/
+directory (by extracting the plugin's files to the corresponding folders in
+~/.vim/; or by using a plugin manager plugin, like <a href="https://github.com/sunaku/vim-unbundle">unbundle</a>, <a href="https://github.com/tpope/vim-pathogen">pathogen</a>, or
+<a href="https://github.com/gmarik/vundle">vundle</a>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">No-configuration plugins</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+There are plenty of vim plugins that enhance vim in some way without you
+having to do anything beyond installing them.
+Here are a few:
+</p>
+<ul class="org-ul">
+<li><a href="https://github.com/scrooloose/syntastic">syntastic</a>: automatic syntax checking
+<ul class="org-ul">
+<li>Automatically checks the syntax of files when you save them.
+</li>
+<li>It depends on external syntax checkers, so make sure
+you have any desired syntax checkers/compilers/linters installed before
+using it (see <a href="https://github.com/scrooloose/syntastic#faq">the FAQ</a> for more info).
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/sickill/vim-pasta">pasta</a>: enhances <a href="http://vimdoc.sourceforge.net/htmldoc/change.html#p">the default paste command</a>
+<ul class="org-ul">
+<li>Makes the default paste command indent the text you're pasting
+</li>
+<li>This is similar to the builtin `]p` command (<a href="http://vimdoc.sourceforge.net/htmldoc/change.html#]p">docs</a>), but adds some
+useful differences.
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/tpope/vim-endwise">endwise</a>: completes block statements in vimscript, ruby, and more.
+<ul class="org-ul">
+<li>When you type 'do' in ruby (and other languages) and hit enter,
+this plugin adds an 'end' on the next line.
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/tpope/vim-surround">surround</a>: Easy handling of surrounding quotes, brackets, tags, etc
+<ul class="org-ul">
+<li>Allows you to change, delete, and add surrounding quotes, xml
+tags, etc.
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/tpope/vim-rsi">rsi</a> aka "Readline style insertion"
+<ul class="org-ul">
+<li>More <a href="http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html#Introduction">readline</a>-like keybindings for vim
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/tpope/vim-repeat">repeat</a>: Repeat some plugin actions
+<ul class="org-ul">
+<li>Allows plugins to repeat their actions using the builtin
+<a href="http://vimdoc.sourceforge.net/htmldoc/repeat.html#.">.</a> command.
+</li>
+<li>Commands from plugins like <a href="https://github.com/tpope/vim-surround">vim-surround</a> can't always be
+repeated with the builtin . command.  This plugin provides an interface
+for those plugins to add support for the repeat command.
+<ul class="org-ul">
+<li>Note: Additional plugins aren't supported by default, some
+plugins that allow their commands to be repeated with <a href="https://github.com/tpope/vim-repeat">repeat</a>
+are described in <a href="https://github.com/tpope/vim-repeat#repeatvim">the README</a>.
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/Lokaltog/powerline">powerline</a> and <a href="https://github.com/bling/vim-airline">airline</a>: enhanced status bar for vim
+<ul class="org-ul">
+<li>Enhances the default status bar in vim.
+</li>
+<li>Note: to show the statusbar at all times, add <a href="http://vimdoc.sourceforge.net/htmldoc/options.html#'laststatus'">set laststatus=2</a>
+to your ~/.vimrc; by default it will be shown when you have more than one
+window open.
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/amdt/vim-niji">niji</a>: Highlights matching parenthesis and braces
+<ul class="org-ul">
+<li>When you're editing code with many matching parens/braces it
+can be hard to read which parens/braces match up. While indentation helps
+a lot with this, sometimes it's useful to have a few extra colors.
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/tpope/vim-rails">rails</a> and <a href="https://github.com/tpope/vim-rake">rake</a> plugins: makes editing ruby/rails projects easier
+<ul class="org-ul">
+<li>In addition to adding commands like <a href="https://github.com/tpope/vim-rails/blob/bdc32389e7053c608a65f870c6c8f5e1210432a7/doc/rails.txt#L215-L237">:Econtroller</a> that ease moving around
+in projects, these plugins enhance the builtin <a href="http://vimdoc.sourceforge.net/htmldoc/editing.html#gf">gf</a> command to work better
+in those projects.
+</li>
+</ul>
+</li>
+<li><a href="https://bitbucket.org/kovisoft/paredit">paredit</a>: Structured editing parenthesies/quotes/brackets
+<ul class="org-ul">
+<li>This is a port of the great <a href="http://www.emacswiki.org/emacs/ParEdit">Emacs ParEdit</a> plugin
+</li>
+<li>Helps you keep your parens/etc matched when editing so you can focus on
+other things (like what you're building).
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/losingkeys/vim-stopsign">stopsign</a>: insert debugging statements (shameless self-promotion)
+<ul class="org-ul">
+<li>When you type `dbg`, this plugin replaces it with a line of code to stop
+your program
+</li>
+<li>This is a little more useful than the <a href="http://vimdoc.sourceforge.net/htmldoc/map.html#:iabbrev">standard abbreviation command</a>
+because it's not filetype dependant (it will expand to different code
+depending on the filetype)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Filetype specific settings</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+You might want some options set only on certian filetypes. By using
+<a href="http://vimdoc.sourceforge.net/htmldoc/autocmd.html#:autocmd">autocommands</a> and <a href="http://vimdoc.sourceforge.net/htmldoc/options.html#:setlocal">local options</a> you can achieve this easily.  For example
+here's a snippet from <a href="https://github.com/losingkeys/dotfiles/">my dotfiles</a> that spell checks markdown files, git commit
+messages, and cucumber files as they're edited:
+</p>
+<div class="org-src-container">
+
+
+
+<div class="highlight"><pre> autocmd <span class="nb">FileType</span> markdown<span class="p">,</span>gitcommit<span class="p">,</span>cucumber <span class="k">setlocal</span> <span class="k">spell</span> <span class="c">&quot; spellcheck these files by default</span></pre></div>
+
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Automatic text formatting</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+For filetypes and comments where you know you're going to want some automatic
+formatting (for instance markdown or orgmode files) you can change the
+compound option <a href="http://vimdoc.sourceforge.net/htmldoc/options.html#'formatoptions'">formatoptions</a>. All available options (described each by a
+single character) are described <a href="http://vimdoc.sourceforge.net/htmldoc/change.html#fo-table">in the documentation</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Conclusion</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Though your editor still isn't an automatic code-producing robot, it should
+feel a little more automated than before.
+</p>
+</div>
+</div>
+<a href=/ rel=contents alt='back to the list of posts' title='back to the list of posts'>← back to the list of posts</a>
+</section>
+<footer>
+  <ul>
+    <li> colors from <a href=http://ethanschoonover.com/solarized>solarized</a> by <a href=http://ethanschoonover.com/>Ethan Schoonover</a> </li>
+    <li> code highlighted by <a href=http://pygments.org/>pygments</a> </li>
+    <li> fonts from <a href=http://openfontlibrary.org/>open font library</a> </li>
+    <li> i'm called <a href=https://github.com/losingkeys>losingkeys</a> on github </li>
+    <li> i'm called <a href=https://twitter.com/losingkeys>losingkeys</a> on twitter </li>
+  </ul>
+</footer>
+<script src=/js/app.js></script>
+</body>
+</html>
