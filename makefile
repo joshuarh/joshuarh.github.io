@@ -50,6 +50,8 @@ posts/%.html: src/posts/%.org
 \
 		--eval "(beginning-of-buffer)" \
 		--eval "(insert-file \"$(PWD)/src/partials/post_start.html\")" \
+		--eval "(beginning-of-buffer)" \
+		--eval "(insert-file \"$(PWD)/src/partials/head.html\")" \
 		--eval "(write-file \"$(PWD)/$@\")" \
 		--kill
 
@@ -66,7 +68,7 @@ posts/%.html: src/posts/%.org
 			"$(PWD)/src/partials/end.html" >> '$@'
 
 index.html: src/posts/*.org src/partials/*.html
-	cat src/partials/index_start.html > index.html
+	cat src/partials/head.html src/partials/index_start.html > index.html
 
 	echo "<ul id=posts>" >> index.html
 

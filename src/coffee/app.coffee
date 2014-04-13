@@ -29,3 +29,6 @@ document.getElementById('theme-toggle').addEventListener 'click', ->
 
 document.getElementById('download-links-toggle').addEventListener 'click', ->
   toggle_class document.body, 'show-download-links'
+
+document.getElementById('menu-toggle').addEventListener 'click', ->
+  toggle_class this, 'menu-visible'

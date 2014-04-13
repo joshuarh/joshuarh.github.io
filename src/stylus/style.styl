@@ -133,20 +133,19 @@ footer
 .back-to-home
   display inline-block
 
-.control-link
+.menu-visible ~ .menu-item
+  display block
+
+#menu-toggle
+  display block
+  margin-right 25px
+
+.menu-item
+  display none
+  float right
   cursor pointer
   padding 5px
-  position absolute
-  top 0
-
-#theme-toggle
-  right 15px
-
-#download-links-toggle
-  right 60px
-
-#return-to-home
-  right 90px
+  margin 0 3px
 
 .date
   display block
@@ -204,15 +203,15 @@ iframe[id^=asciicast-iframe]
       background-color base3
       color base00
 
-      .control-link:hover
-      .control-link:active
-      .control-link:focus
+      .menu-item:hover
+      .menu-item:active
+      .menu-item:focus
       a:hover
       a:active
       a:focus
         background-color base2
 
-      h1, .control-link
+      h1, .menu-item
         color base01
 
       ul
@@ -223,15 +222,15 @@ iframe[id^=asciicast-iframe]
       background-color base03
       color base0
 
-      .control-link:hover
-      .control-link:active
-      .control-link:focus
+      .menu-item:hover
+      .menu-item:active
+      .menu-item:focus
       a:hover
       a:active
       a:focus
         background-color base02
 
-      h1, .control-link
+      h1, .menu-item
         color base1
 
       ul
@@ -241,7 +240,7 @@ iframe[id^=asciicast-iframe]
   a
     text-decoration underline
 
-  .control-link
+  .menu-item
     display none
 
 // }}} solarized colorscheme application
