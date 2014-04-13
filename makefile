@@ -60,7 +60,7 @@ posts/%.html: src/posts/%.org
 		--eval "(write-file \"$(PWD)/$@\")" \
 		--kill
 
-	# remove the extra LaTeX file that was used to make the PDF
+	# remove the unneeded LaTeX file that was used to make the PDF
 	-rm posts/$(*F).tex
 
 	# highlight code blocks if there are any
