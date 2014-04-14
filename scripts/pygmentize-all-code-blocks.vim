@@ -8,7 +8,7 @@ Bf-l
 "fyt"
 yit
 :new
-p
+P
 :only!
 :bnext
 :" org-export-to-file escapes html entities
