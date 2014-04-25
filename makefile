@@ -47,7 +47,6 @@ posts/%.html: src/posts/%.org
 		--eval "(org-ascii-export-to-ascii)" \
 \
 		--eval "(find-file \"$(PWD)/$@\")" \
-		--eval "(insert \"<section id=content>\")" \
 		--eval "(insert \"<h1>$(subst -, ,$(*F))</h1>\")" \
 		--eval "(insert \"<a href='/posts/$(*F).pdf' target=_blank class='post-download-link post-pdf-link' title='download as pdf'> $(PDF_SYMBOL) pdf </a>\")" \
 		--eval "(insert \"<a href='/posts/$(*F).txt' target=_blank class='post-download-link post-source-link' title='download as text'> $(TEXT_SYMBOL) text </a>\")" \
