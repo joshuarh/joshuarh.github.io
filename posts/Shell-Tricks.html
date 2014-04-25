@@ -1,0 +1,485 @@
+<!doctype html>
+<html>
+<head>
+  <title>Josh's Blog</title>
+  <meta charset=utf-8>
+  <meta name=viewport content='initial-scale=1'>
+  <link href=/css/style.css rel=stylesheet>
+  <link href=//openfontlibrary.org/face/lato-regular rel=stylesheet>
+</head>
+<body class=light>
+   <a href=javascript:void(0)
+     id=menu-toggle
+     class=menu-item
+     title='toggle the menu'>
+    ☰
+   </a>
+
+  <a href=javascript:void(0)
+    id=theme-toggle
+    class=menu-item
+    title='toggle light/dark themes'>
+    ☼☽
+  </a>
+
+  <a href=javascript:void(0)
+    id=download-links-toggle
+    class=menu-item
+    title='toggle download links'>
+    ↓
+  </a>
+
+  <a href=/
+    id=return-to-home
+    class=menu-item
+    title='back to the list of posts'
+    rel=contents>
+    ←
+  </a>
+<section id=content><h1>Shell Tricks</h1><a href='/posts/Shell-Tricks.pdf' target=_blank class='post-download-link post-pdf-link' title='download as pdf'> 𝒫 pdf </a><a href='/posts/Shell-Tricks.txt' target=_blank class='post-download-link post-source-link' title='download as text'> ✏ text </a><a href='/src/posts/Shell-Tricks.org' target=_blank class='post-download-link post-source-link' title='download as org-mode text'> ⌘ source </a><div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Intro</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Here are some ways to speed up your shell use and make using a terminal more
+enjoyable. Depending on what you're working on, your mileage may vary, so
+change and adapt this stuff until you're comfortable.
+</p>
+
+<p>
+Usually when you open up a terminal, you're using <a href="https://www.gnu.org/software/bash/">Bash</a>, but you may also be
+using <a href="http://www.zsh.org/">Zsh</a>. You can pick one or the other (see <a href="http://linuxcommand.org/man_pages/chsh1.html">chsh</a> for more info). To figure
+out which one you're using, open up a terminal and run:
+</p>
+<div class="org-src-container">
+
+
+
+<div class="highlight"><pre><span class="nb">echo</span> <span class="nv">$SHELL</span></pre></div>
+
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Interactive stuff</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">Vi mode or Readline?</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Interactive shells give you some tools to edit the current command you're
+entering, to search your command history, and do other useful stuff. By
+default if you're running Bash, you'll be using <a href="http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html">GNU Readline</a> (which defaults
+to <a href="https://www.gnu.org/software/emacs/">Emacs</a>-like hotkeys).
+</p>
+
+<p>
+If you're using Zsh, you'll be using <a href="https://wiki.archlinux.org/index.php/Zsh#Key_bindings">something like readline</a>, which either
+defaults to emacs-like keyboard shortcuts, or <a href="https://en.wikipedia.org/wiki/Vi">vi</a>-like shortcuts. This depends
+on whether you've specifically asked for one or the other (see <a href="http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Zle-Builtins">bindkey</a>), what
+<code>$EDITOR</code> is set to, and possibly other things.
+</p>
+</div>
+<div id="outline-container-sec-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1">Why is this important?</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+It's more important to know that there are at least two different sets of
+keybindings, than to choose one. If you're used to <a href="http://www.vim.org/">Vim</a>, realize that vi-mode
+is missing some stuff you might have gotten used to (try <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#iw">ciw</a> with your
+cursor in the middle of a word, or <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#aquote">ca"</a> when inside double quotes).
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2">Readline</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+The bash manual has a good reference for the <a href="http://www.gnu.org/software/bash/manual/bashref.html#Readline-Interaction">emacs-like keybindings</a>. The ones
+I use most are:
+</p>
+<ul class="org-ul">
+<li><code>C-r</code> to search backwards through command history, keep pressing <code>C-r</code> to
+find the next item. (where <code>C</code> is the Control/Ctrl key)
+</li>
+<li><code>C-s</code> to search forwards through command history
+</li>
+<li><code>M-f</code> move forwards one word (where <code>M</code> is the Meta/Option/Alt key)
+</li>
+<li><code>M-b</code> move back one word
+</li>
+<li><code>C-k</code> delete text from the cursor to the end of the line
+</li>
+<li><code>C-/</code> undo the last action (just for editing text, not undoing commands;
+how cool would that be though?)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3">Vi mode</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+I had trouble finding an official list of keybindings for vi-mode, but <a href="http://hea-www.harvard.edu/~fine/Tech/vi.html">this
+list</a> looks right, and I found a <a href="http://dougblack.io/words/zsh-vi-mode.html">blog post</a> that talks about configuring vi
+mode in Zsh.
+</p>
+
+<p>
+When in vi mode you're either running commands (normal/command mode), or
+inserting text (insert mode). To show which mode you're in, check out <a href="http://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode#1019">this
+stackexchange answer</a> for Zsh. It doesn't appear that you can tell which mode
+you're in when running bash, so try to remember which mode you're in, or just
+<a href="http://superuser.com/questions/18583/how-to-show-the-current-vi-mode-when-using-vi-keybindings-in-the-shell#21510">press escape a lot</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4">Job Control</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Running commands in your shell are sometimes referred to as "jobs", sometimes
+they take over the shell (like when you're running vim or emacs). Here are
+some useful things you can do to running commands:
+</p>
+<ul class="org-ul">
+<li>Stop a running command (including editors) with <code>C-z</code>
+</li>
+<li>See which commands are running with the <code>jobs</code> command
+</li>
+<li>Bring a job to the foreground with the <code>fg</code> command
+</li>
+<li>Bring a specific command (as seen in the output of <code>jobs</code>) to the
+foreground with <code>fg %1</code> where 1 is the id of the command
+</li>
+</ul>
+
+<p>
+Suspending programs and running others can be useful when some of your
+workflow requires an interactive program (like an editor), but you need a
+quick shell here and there (like when you're running recently-edited test
+code). To me, this feels faster than switching terminals or using something
+like <a href="http://tmux.sourceforge.net/">tmux</a>. For more info about job control, see <a href="https://www.gnu.org/software/bash/manual/bashref.html#Job-Control">the bash manual</a>.
+</p>
+</div>
+<div id="outline-container-sec-2-4-1" class="outline-4">
+<h4 id="sec-2-4-1">Aliases for quick job control</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<div class="org-src-container">
+
+
+
+<div class="highlight"><pre><span class="nb">alias </span><span class="nv">f</span><span class="o">=</span><span class="nb">fg</span> <span class="c"># foreground the command that was last suspended</span>
+<span class="nb">alias </span><span class="nv">j</span><span class="o">=</span><span class="nb">jobs</span> <span class="c"># show the list of background jobs</span>
+<span class="nb">alias </span><span class="nv">f1</span><span class="o">=</span><span class="s1">&#39;fg %1&#39;</span> <span class="c"># bring the first suspended job to the foreground</span>
+<span class="nb">alias </span><span class="nv">f2</span><span class="o">=</span><span class="s1">&#39;fg %2&#39;</span> <span class="c"># note: this isn&#39;t a function key,</span>
+<span class="nb">alias </span><span class="nv">f3</span><span class="o">=</span><span class="s1">&#39;fg %3&#39;</span> <span class="c"># but the letter &#39;f&#39; followed by the number &#39;1&#39;</span>
+<span class="nb">alias </span><span class="nv">f4</span><span class="o">=</span><span class="s1">&#39;fg %4&#39;</span>
+<span class="nb">alias </span><span class="nv">f5</span><span class="o">=</span><span class="s1">&#39;fg %5&#39;</span></pre></div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5">Scripts aren't run "interactively"</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+When you run a script that you saved to a file, usually all the fancy aliases
+and other things that you use when typing in your shell aren't available,
+because they're not needed. The bash manual has a good explanation of
+<a href="http://www.gnu.org/software/bash/manual/bashref.html#Interactive-Shells">interactive shells</a>.
+</p>
+
+<p>
+Whether your shell is interactive affects:
+</p>
+<ul class="org-ul">
+<li>which files are loaded when the shell starts (see the <a href="http://www.gnu.org/software/bash/manual/bashref.html#Bash-Startup-Files">bash manual</a> or the
+<a href="http://zsh.sourceforge.net/Doc/Release/Files.html#Startup_002fShutdown-Files">zsh manual</a>)
+<ul class="org-ul">
+<li>this means your aliases usually won't be loaded when scripting, which is
+a good things (your scripts will be more portable), but can be confusing
+when you're running a shell from another program like <a href="http://vimdoc.sourceforge.net/htmldoc/various.html#:!"><code>:!</code> command in vi</a>.
+</li>
+</ul>
+</li>
+<li><a href="https://www.gnu.org/software/bash/manual/bashref.html#Interactive-Shell-Behavior">other things</a>, like <a href="https://www.gnu.org/software/bash/manual/bashref.html#Job-Control">job control</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Switch between directories</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+You might find that you spend a lot of time switching directories. Here are a
+few things you can use to speed this up:
+</p>
+<div class="org-src-container">
+
+
+
+<div class="highlight"><pre><span class="nb">cd</span> - <span class="c"># the last directory you were in</span>
+<span class="nb">cd</span> <span class="c"># the home directory, same as `cd ~` or `cd $HOME`</span></pre></div>
+
+
+</div>
+</div>
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1">Useful aliases for moving up directories</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+
+
+<div class="highlight"><pre><span class="nb">alias</span> ..<span class="o">=</span><span class="s1">&#39;cd ..&#39;</span> <span class="c"># move up one directory</span>
+<span class="nb">alias</span> ..2<span class="o">=</span><span class="s1">&#39;cd ../..&#39;</span> <span class="c"># move up two directories</span>
+<span class="nb">alias</span> ..3<span class="o">=</span><span class="s1">&#39;cd ../../..&#39;</span>
+<span class="nb">alias</span> ..4<span class="o">=</span><span class="s1">&#39;cd ../../../..&#39;</span></pre></div>
+
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2">Switching between projects</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+It's also good to keep things organized. Personally I keep my code/work in
+<code>~/projects</code>, which (with a <a href="https://github.com/losingkeys/dotfiles/blob/707ded233a202ee4849491c00b553e33b9c88bbd/.zshrc#L63-L69">simple shell function</a> and <a href="http://zsh.sourceforge.net/Doc/Release/Completion-System.html">Zsh's <code>compdef</code> for
+completion magic</a>) makes it really easy to switch to different projects, or
+get back to a project's root directory. <code>p &lt;project&gt;</code> will bring you to a
+specific project's folder. This is a bit nicer than <code>cd</code> because it doesn't
+matter what directory you're in, <code>p</code> will always switch you back to
+<code>~/projects</code> (when given no arguments), or <code>~/projects/something</code> if you type
+<code>p something</code>.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Run previously ran commands</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+
+
+
+<div class="highlight"><pre>!! <span class="c"># the last command</span>
+
+sudo !! <span class="c"># the last command, but with an added prefix</span>
+
+!-2 <span class="c"># the second to last command, for instance:</span>
+touch something/file
+<span class="c">#=&gt; touch: cannot touch ‘something/file’: No such file or directory</span>
+mkdir something
+!-2 <span class="c"># runs `touch something/file`</span>
+
+!1234 <span class="c"># the &#39;1234&#39;th history item, use `history` to see them all</span></pre></div>
+
+
+</div>
+<p>
+I just learned these are called "event designators", for more info, see <a href="http://www.gnu.org/software/bash/manual/bashref.html#Event-Designators">the
+bash manual</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">One-character aliases</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+You might notice that you run certain commands very often. Why not make these
+as short as possible by aliasing them to a single letter? Here are mine so
+far:
+</p>
+<div class="org-src-container">
+
+
+
+<div class="highlight"><pre><span class="nb">alias </span><span class="nv">e</span><span class="o">=</span><span class="s1">&#39;TERM=xterm-16color emacs -nw&#39;</span> <span class="c"># edit text/code with emacs</span>
+<span class="nb">alias </span><span class="nv">v</span><span class="o">=</span>vim <span class="c"># edit text/code with vim</span>
+<span class="nb">alias </span><span class="nv">m</span><span class="o">=</span>mutt <span class="c"># read mail</span>
+
+<span class="nb">alias </span><span class="nv">g</span><span class="o">=</span>git <span class="c"># manage changes to files (http://git-scm.com/)</span>
+
+<span class="nb">alias </span><span class="nv">f</span><span class="o">=</span><span class="nb">fg</span> <span class="c"># bring a background job to the foreground</span>
+<span class="nb">alias </span><span class="nv">j</span><span class="o">=</span><span class="nb">jobs</span> <span class="c"># list background jobs</span>
+
+<span class="nb">alias </span><span class="nv">l</span><span class="o">=</span>ls <span class="c"># list files</span>
+
+<span class="c"># start or join a tmux session:</span>
+<span class="nb">alias </span><span class="nv">t</span><span class="o">=</span><span class="s1">&#39;tmux attach || tmux new -s &quot;$(basename $PWD | sed &quot;s/\W/-/g&quot;)&quot;&#39;</span>
+
+<span class="c"># update an Arch Linux system:</span>
+<span class="nb">alias </span><span class="nv">u</span><span class="o">=</span><span class="s2">&quot;su -c &#39;pacman --sync --refresh --sysupgrade&#39;&quot;</span>
+<span class="c"># update an OS X system:</span>
+<span class="nb">alias </span><span class="nv">u</span><span class="o">=</span><span class="s1">&#39;sudo softwareupdate --download --install --all &amp;&amp; brew update &amp;&amp; brew upgrade&#39;</span></pre></div>
+
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">Adding, editing, and pruning aliases</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Even though I <a href="https://en.wikipedia.org/wiki/Pair_programming">pair program</a> at work, I still make <a href="https://github.com/losingkeys/dotfiles/blob/707ded233a202ee4849491c00b553e33b9c88bbd/.shell-helpers/aliases">plenty of aliases</a>. Some
+people avoid aliases all together because they pair. It's frustrating to type
+in a command you're used to working and get a "command not found" error, or
+worse: get some behavior you didn't expect (I've heard of people aliasing <code>git
+  co</code> to <code>git commit</code>, where some of us would expect it to run <code>git checkout</code>).
+Here are some things to keep in mind when making aliases:
+</p>
+</div>
+<div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1">Am I overriding something the system provides?</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+See if the command already exists before aliasing it. You can do this in a
+number of ways:
+</p>
+<ul class="org-ul">
+<li>Running the command (possibly dangerous). If you get an "<code>ab</code>: command not
+found" or similar error, you're probably clear to alias it away.
+</li>
+<li>Search your distribution's <a href="https://www.archlinux.org/packages/">package archives</a>. You can usually do this with
+your OS's <a href="https://www.archlinux.org/pacman/">package manager</a> right from the terminal
+<ul class="org-ul">
+<li>You may be able to search for existing binaries/commands using something
+like <a href="https://www.archlinux.org/packages/extra/x86_64/pkgfile/">pkgfile</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2">Is what I'm about to alias destructive in any way? Can it's effects be reversed?</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Be aware that making destructive commands easier to type means you'll be
+typing them faster, maybe even without thinking. If you were to accidentally
+run whatever it is you're about to alias (for instance you might alias <code>rm
+   -f</code> to <code>r</code> to avoid typing the flag all the time), can you reverse whatever
+it did? How hard would that be?  Sometimes it might be worth leaving certain
+commands more tedious so you don't lose work. Also some commands can be made
+safer with options. You could alias <code>rm</code> to <code>rm -i</code> or <code>rm -I</code> to make it ask
+for confirmation when deleting files.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3">What would other people expect this to do?</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Depending on how much you pair with other people, it may be important to
+think about what kinds of commands they'll be running on your machine (or
+what kinds of commands you'll expect to be available on their
+machine). Personally I don't put too much weight into this, because if an
+alias or some configuration is messing one of you up, you can just remove it
+(or add it if you're missing an alias you use a lot).
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6-4" class="outline-3">
+<h3 id="sec-6-4">You should change your aliases</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+Be aware of aliases that you often need to pass options to. For instance, if
+you've aliased <code>gc</code> to <code>git commit</code>, and you usually end up typing <code>gc
+   --patch</code> or <code>gc -p</code>, why not just add that option to your alias?
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">Know how to discover what's available on whatever machine you're working on</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Knowing how to change your setup to match your preferences is almost as
+important as knowing how to figure out what's been set up. Commands like
+<a href="http://linuxcommand.org/man_pages/which1.html"><code>which</code></a> and <a href="http://explainshell.com/explain?cmd=command+-v"><code>command -v</code></a> can help you figure out whether a command is an
+alias, binary, or function. These are so useful I've aliased <code>which</code> to <code>?</code> on
+my machines:
+</p>
+<div class="org-src-container">
+
+
+
+<div class="highlight"><pre><span class="nb">alias</span> <span class="s1">&#39;?&#39;</span><span class="o">=</span>which
+
+? la
+<span class="c">#=&gt; la: aliased to ls --almost-all</span>
+
+? sh
+<span class="c">#=&gt; /usr/bin/sh</span>
+
+? <span class="nb">cd</span>
+<span class="c">#=&gt; cd: shell built-in command</span></pre></div>
+
+
+</div>
+<p>
+You can do similar things with git:
+</p>
+<div class="org-src-container">
+
+
+
+<div class="highlight"><pre><span class="nb">alias </span><span class="nv">g</span><span class="o">=</span>git
+g config --global alias.h <span class="nb">help</span>
+
+g h c
+<span class="c">#=&gt; `git c&#39; is aliased to `commit --verbose&#39;</span>
+
+g h commit
+<span class="c"># shows the manual for `git commit`</span>
+<span class="c"># you can&#39;t shadow (alias over) built-in git subcommands</span></pre></div>
+
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">Conclusion</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+I hope you've learned something that will make you more productive. If you
+have any comments on the post, or shell tips for me, I'm on twitter (link at
+the bottom), and <a href="https://github.com/losingkeys/dotfiles/">my setup</a> is open source, so fork away!
+</p>
+</div>
+</div>
+<a href=/ rel=contents title='back to the list of posts'>← back to the list of posts</a>
+</section>
+<footer>
+  <ul>
+    <li> colors from <a href=http://ethanschoonover.com/solarized>solarized</a> by <a href=http://ethanschoonover.com/>Ethan Schoonover</a> </li>
+    <li> code highlighted by <a href=http://pygments.org/>pygments</a> </li>
+    <li> fonts from <a href=http://openfontlibrary.org/>open font library</a> </li>
+    <li> i'm called <a href=https://github.com/losingkeys>losingkeys</a> on github </li>
+    <li> i'm called <a href=https://twitter.com/losingkeys>losingkeys</a> on twitter </li>
+  </ul>
+</footer>
+<script src=/js/app.js></script>
+</body>
+</html>
