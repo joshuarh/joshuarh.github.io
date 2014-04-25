@@ -80,15 +80,15 @@ index.html: src/posts/*.org src/partials/*.html
 	for post in $(POST_TARGETS); do \
 		post_name="$$(basename $${post%.*})"; \
 		post_title="$$(echo $$post_name | tr '-' ' ')"; \
-		post_src="/src/posts/$$post_name.org"; \
-		post_pdf="/posts/$$post_name.pdf"; \
-		post_text="/posts/$$post_name.txt"; \
+		post_src="src/posts/$$post_name.org"; \
+		post_pdf="posts/$$post_name.pdf"; \
+		post_text="posts/$$post_name.txt"; \
 		post_author_date="$$(git log --format=format:%ai -- $$post_src | tail -1)"; \
 		echo "<li><a href=\"/$$post\">$$post_title</a> \
 							<span class=date>$$(date --date=" $$post_author_date " +'%e %B, %Y')</span>\
-							<a href=\"$$post_pdf\" target=_blank class='post-download-link post-pdf-link' alt='download as pdf' title='download as pdf'> $(PDF_SYMBOL) pdf </a> \
-							<a href=\"$$post_text\" target=_blank class='post-download-link post-source-link' alt='download as text' title='download as text'> $(TEXT_SYMBOL) text </a> \
-							<a href=\"$$post_src\" target=_blank class='post-download-link post-source-link' alt='download as org-mode text' title='download as org-mode text'> $(SOURCE_SYMBOL) source </a> \
+							<a href=\"/$$post_pdf\" target=_blank class='post-download-link post-pdf-link' title='download as pdf'> $(PDF_SYMBOL) pdf </a> \
+							<a href=\"/$$post_text\" target=_blank class='post-download-link post-source-link' title='download as text'> $(TEXT_SYMBOL) text </a> \
+							<a href=\"/$$post_src\" target=_blank class='post-download-link post-source-link' title='download as org-mode text'> $(SOURCE_SYMBOL) source </a> \
 					</li>" >> index.html; \
 	done
 
