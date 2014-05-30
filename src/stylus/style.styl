@@ -55,25 +55,24 @@ footer
     column-count 2
     column-gap 30px
 
-  #posts-header
-    padding 0 15px
-
   //FIXME enable when you write more posts
 
   // #posts
   //   column-count 3
   //   column-gap 30px
 
-  #content, #posts
-    padding 0 25px
+  side-padding = 25px
+
+  #content, #posts, posts-header
+    padding 0 side-padding
+
+  #menu-toggle
+    margin-right side-padding
 
 @media (max-width: 900px)
   footer ul
     column-count 2
     column-gap 30px
-
-  #posts-header
-    padding 0 10px
 
   //FIXME enable when you write more posts
 
@@ -81,8 +80,13 @@ footer
   //   column-count 2
   //   column-gap 30px
 
+  side-padding = 20px
+
   #content, #posts, #posts-header
-    padding 0 20px
+    padding 0 side-padding
+
+  #menu-toggle
+    margin-right side-padding
 
 @media (max-width: 700px)
   footer ul
@@ -95,8 +99,13 @@ footer
   //   column-count 1
   //   column-gap 30px
 
+  side-padding = 10px
+
   #content, #posts, #posts-header
-    padding 0 10px
+    padding 0 side-padding
+
+  #menu-toggle
+    margin-right side-padding
 
   // don't indent lists quite as much for very small screens
   ol, ul
@@ -139,7 +148,6 @@ footer
 
 #menu-toggle
   display block
-  margin-right 25px
 
 .menu-item
   display none
