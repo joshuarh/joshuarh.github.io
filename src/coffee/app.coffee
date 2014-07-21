@@ -1,6 +1,6 @@
 # helpers {{{
 
-# helper function to toggle a css class on an element
+# toggle a css class on an element
 toggle_class = (el, className) ->
   classRegexp = new RegExp '\\b' + className + '\\b'
 
@@ -10,19 +10,11 @@ toggle_class = (el, className) ->
     else
       el.className + ' ' + className + ' '
 
-toggle_light_dark = ->
+toggle_alternate_theme = ->
   toggle_class document.body, 'dark'
   toggle_class document.body, 'light'
 
 # }}} helpers
-
-# on load {{{
-
-addEventListener 'load', ->
-  if localStorage.getItem('use-alternate-theme') is 'true'
-    toggle_light_dark()
-
-# }}} on load
 
 # on click {{{
 
@@ -35,7 +27,7 @@ document.getElementById('theme-toggle').addEventListener 'click', ->
   usingAlternateTheme = localStorage.getItem('use-alternate-theme') is 'true'
 
   localStorage.setItem 'use-alternate-theme', !usingAlternateTheme
-  toggle_light_dark()
+  toggle_alternate_theme()
 
 document.getElementById('download-links-toggle').addEventListener 'click', ->
   toggle_class document.body, 'show-download-links'
@@ -44,3 +36,7 @@ document.getElementById('menu-toggle').addEventListener 'click', ->
   toggle_class this, 'menu-visible'
 
 # }}} on click
+
+# use the theme the most recently chose
+if localStorage.getItem('use-alternate-theme') is 'true'
+  toggle_alternate_theme()
