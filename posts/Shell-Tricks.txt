@@ -4,28 +4,23 @@
 			     ______________
 
 
-Intro
-=====
+Here are some ways to speed up your shell use and make using a terminal
+more enjoyable. Depending on what you're working on, your mileage may
+vary, so change and adapt this stuff until you're comfortable.
 
-  Here are some ways to speed up your shell use and make using a
-  terminal more enjoyable. Depending on what you're working on, your
-  mileage may vary, so change and adapt this stuff until you're
-  comfortable.
-
-  Usually when you open up a terminal, you're using [Bash], but you may
-  also be using [Zsh]. You can pick one or the other (see [chsh] for
-  more info). To figure out which one you're using, open up a terminal
-  and run:
-  ,----
-  | echo $SHELL
-  `----
+Usually when you open up a terminal, you're using [Bash], but you may
+also be using [Zsh]. You can pick one or the other (see [chsh] for more
+info). To figure out which one you're using, open up a terminal and run:
+,----
+| echo $SHELL
+`----
 
 
-  [Bash] https://www.gnu.org/software/bash/
+[Bash] https://www.gnu.org/software/bash/
 
-  [Zsh] http://www.zsh.org/
+[Zsh] http://www.zsh.org/
 
-  [chsh] http://linuxcommand.org/man_pages/chsh1.html
+[chsh] http://linuxcommand.org/man_pages/chsh1.html
 
 
 Interactive stuff
@@ -330,8 +325,8 @@ Am I overriding something the system provides?
   [pkgfile] https://www.archlinux.org/packages/extra/x86_64/pkgfile/
 
 
-Is what I'm about to alias destructive in any way? Can it's effects be reversed?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Is what I'm about to alias destructive in any way? Can its effects be reversed?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Be aware that making destructive commands easier to type means you'll
   be typing them faster, maybe even without thinking. If you were to
