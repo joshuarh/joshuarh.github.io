@@ -64,6 +64,9 @@ posts/%.html: src/posts/%.org
 		vim -s scripts/pygmentize-all-code-blocks.vim "$(PWD)/$@"; \
 	fi
 
+	# add anchor links to section headers
+	vim -s scripts/add-anchor-links.vim "$(PWD)/$@"; \
+
 	cat "$(PWD)/src/partials/post_end.html" \
 			"$(PWD)/src/partials/footer.html" \
 			"$(PWD)/src/partials/end.html" >> '$@'
