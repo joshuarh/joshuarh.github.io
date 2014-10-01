@@ -65,7 +65,9 @@ posts/%.html: src/posts/%.org
 	fi
 
 	# add anchor links to section headers
-	vim -s scripts/add-anchor-links.vim "$(PWD)/$@"; \
+	if [ -n "$$(grep --only-matching "\<h. id=.sec" "$(PWD)/$@")" ]; then \
+		vim -s scripts/add-anchor-links.vim "$(PWD)/$@"; \
+	fi
 
 	cat "$(PWD)/src/partials/post_end.html" \
 			"$(PWD)/src/partials/footer.html" \
