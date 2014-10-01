@@ -10,7 +10,6 @@ yit
 :new
 P
 :only!
-:bnext
 :" org-export-to-file escapes html entities
 :silent! %s/&amp;/\&/g
 :silent! %s/&gt;/>/g
