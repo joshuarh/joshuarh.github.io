@@ -54,13 +54,8 @@ footer
   //   column-count 3
   //   column-gap 30px
 
-  side-padding = 25px
-
-  #content, #posts, posts-header
-    padding 0 side-padding
-
-  #menu-toggle
-    margin-right side-padding
+  body
+    padding 0 25px
 
 @media (max-width: 900px)
   footer ul
@@ -73,13 +68,8 @@ footer
   //   column-count 2
   //   column-gap 30px
 
-  side-padding = 20px
-
-  #content, #posts, #posts-header
-    padding 0 side-padding
-
-  #menu-toggle
-    margin-right side-padding
+  body
+    padding 0 20px
 
 @media (max-width: 700px)
   footer ul
@@ -92,18 +82,12 @@ footer
   //   column-count 1
   //   column-gap 30px
 
-  side-padding = 10px
-
-  #content, #posts, #posts-header
-    padding 0 side-padding
-
-  #menu-toggle
-    margin-right side-padding
+  body
+    padding 0 10px
 
   // don't indent lists quite as much for very small screens
   ol, ul
     padding-left 20px
-
 
 // }}} dynamic layout
 
@@ -119,6 +103,7 @@ footer
 
 #posts
   margin-bottom 30px
+  padding 0
 
   li a
     line-height 1.6em
