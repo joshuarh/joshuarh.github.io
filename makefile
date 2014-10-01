@@ -23,7 +23,7 @@ js/app.js: node_modules $(COFFEESCRIPT)
 	coffee --join "$@" --compile $(COFFEESCRIPT)
 	uglifyjs "$@" --compress --mangle --output "$@"
 
-# also makes posts/%.pdf
+# also makes posts/%.pdf and posts/%.txt
 posts/%.html: src/posts/%.org
 	-mkdir -p "$(PWD)/posts/"
 
