@@ -1,5 +1,4 @@
-@import '_pygments'
-@import '_vendor'
+@require _pygments
 
 @font-face
   font-family 'Lato'
@@ -187,92 +186,72 @@ iframe[id^=asciicast-iframe]
 // solarized colorscheme application {{{
 
 @media not print
-  @media (color)
+  @import _colors
 
-    /* Colors are from the solorized colorscheme:
-     * http://ethanschoonover.com/solarized
-     */
-    base0   = #839496
-    base00  = #657b83
-    base01  = #586e75
-    base02  = #073642
-    base03  = #002b36
-    base1   = #93a1a1
-    base2   = #eee8d5
-    base3   = #fdf6e3
-    blue    = #268bd2
-    cyan    = #2aa198
-    green   = #859900
-    magenta = #d33682
-    orange  = #cb4b16
-    red     = #dc322f
-    violet  = #6c71c4
-    yellow  = #b58900
+  // generic colors (these shouldn't need to change)
+  #posts
+    li a
+      color orange
 
-    // generic colors (these shouldn't need to change)
-    #posts
-      li a
-        color orange
+    li:nth-child(odd) a
+      color yellow
 
-      li:nth-child(odd) a
-        color yellow
+  #content a
+    color magenta
 
-    #content a
-      color magenta
+  .date
+    color cyan
 
-    .date
-      color cyan
+  footer
+    li
+      color blue
 
-    footer
-      li
-        color blue
+    li:nth-child(odd)
+      color violet
 
-      li:nth-child(odd)
-        color violet
+    li a
+      color green
 
-      li a
-        color green
+    li:nth-child(odd) a
+      color orange
 
-      li:nth-child(odd) a
-        color orange
+  // solarized light (the default)
+  body
+    background-color base3
+    color base00
 
-    // solarized light (the default)
-    body
-      background-color base3
-      color base00
+    .menu-item:hover
+    .menu-item:active
+    .menu-item:focus
+    a:hover
+    a:active
+    a:focus
+      background-color base2
 
-      .menu-item:hover
-      .menu-item:active
-      .menu-item:focus
-      a:hover
-      a:active
-      a:focus
-        background-color base2
+    h1, .menu-item
+      color base01
 
-      h1, .menu-item
-        color base01
+    ul
+      column-rule-color base01
 
-      ul
-        column-rule-color base01
+  // overrides from the above colors when using the dark variant
+  body.dark
+    background-color base03
+    color base0
 
-    // overrides from the above colors when using the dark variant
-    body.dark
-      background-color base03
-      color base0
+    .menu-item:hover
+    .menu-item:active
+    .menu-item:focus
+    a:hover
+    a:active
+    a:focus
+      background-color base02
 
-      .menu-item:hover
-      .menu-item:active
-      .menu-item:focus
-      a:hover
-      a:active
-      a:focus
-        background-color base02
+    h1, .menu-item
+      color base1
 
-      h1, .menu-item
-        color base1
-
-      ul
-        column-rule-color base1
+    ul
+      column-rule-color base1
 
 @media not screen
   a
