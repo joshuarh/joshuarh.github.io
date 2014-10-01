@@ -77,14 +77,20 @@ index.html: src/posts/*.org src/partials/*.html
 
 	echo "<ul id=posts>" >> index.html
 
-	for post in $(POST_TARGETS); do \
+	# sort posts in last-authored order
+	sorted_posts_list=$$(for f in src/posts/*.org; do \
+		echo "$$(git log -1 --format=%at $$f) $$f"; \
+	done | sort --reverse | cut -d' ' -f2); \
+\
+	for post in $$sorted_posts_list; do \
 		post_name="$$(basename $${post%.*})"; \
 		post_title="$$(echo $$post_name | tr '-' ' ')"; \
 		post_src="src/posts/$$post_name.org"; \
 		post_pdf="posts/$$post_name.pdf"; \
 		post_text="posts/$$post_name.txt"; \
+		post_html="posts/$$post_name.html"; \
 		post_author_date="$$(git log --format=format:%ai -- $$post_src | tail -1)"; \
-		echo "<li><a href=\"/$$post\">$$post_title</a> \
+		echo "<li><a href=\"/$$post_html\">$$post_title</a> \
 							<span class=date>$$(date --date=" $$post_author_date " +'%e %B, %Y')</span>\
 							<a href=\"/$$post_pdf\" target=_blank class='post-download-link post-pdf-link' title='download as pdf'> pdf </a> \
 							<a href=\"/$$post_text\" target=_blank class='post-download-link post-source-link' title='download as text'> text </a> \
