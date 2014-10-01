@@ -5,6 +5,7 @@
   "devDependencies": {
     "coffee-script": "latest",
     "myth": "latest",
+    "sqwish": "latest",
     "stylus": "latest",
     "uglify-js": "latest"
   },

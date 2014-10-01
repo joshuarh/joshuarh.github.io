@@ -16,7 +16,8 @@ css/%.css: node_modules src/stylus/%.styl
 	-mkdir css/
 	stylus src/stylus/ --out css/
 	rm css/_*.css # remove compiled partials
-	myth "$@" "$@" --compress
+	myth "$@" "$@"
+	sqwish "$@" -o "$@"
 
 js/app.js: node_modules $(COFFEESCRIPT)
 	-mkdir js/
