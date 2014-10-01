@@ -45,9 +45,9 @@ posts/%.html: src/posts/%.org
 \
 		--eval "(find-file \"$(PWD)/$@\")" \
 		--eval "(insert \"<h1>$(subst -, ,$(*F))</h1>\")" \
-		--eval "(insert \"<a href='/posts/$(*F).pdf' target=_blank class='post-download-link post-pdf-link' title='download as pdf'> pdf </a>\")" \
-		--eval "(insert \"<a href='/posts/$(*F).txt' target=_blank class='post-download-link post-source-link' title='download as text'> text </a>\")" \
-		--eval "(insert \"<a href='/src/posts/$(*F).org' target=_blank class='post-download-link post-source-link' title='download as org-mode text'> source </a>\")" \
+		--eval "(insert \"<a href='/posts/$(*F).pdf' target=_blank class=post-download-link title='download as pdf'> pdf </a>\")" \
+		--eval "(insert \"<a href='/posts/$(*F).txt' target=_blank class=post-download-link title='download as text'> text </a>\")" \
+		--eval "(insert \"<a href='/src/posts/$(*F).org' target=_blank class=post-download-link title='download as org-mode text'> source </a>\")" \
 \
 		--eval "(beginning-of-buffer)" \
 		--eval "(insert-file \"$(PWD)/src/partials/post_start.html\")" \
@@ -93,9 +93,9 @@ index.html: src/posts/*.org src/partials/*.html
 		post_author_date="$$(git log --format=format:%ai -- $$post_src | tail -1)"; \
 		echo "<li><a href=\"/$$post_html\">$$post_title</a> \
 							<span class=date>$$(date --date=" $$post_author_date " +'%e %B, %Y')</span>\
-							<a href=\"/$$post_pdf\" target=_blank class='post-download-link post-pdf-link' title='download as pdf'> pdf </a> \
-							<a href=\"/$$post_text\" target=_blank class='post-download-link post-source-link' title='download as text'> text </a> \
-							<a href=\"/$$post_src\" target=_blank class='post-download-link post-source-link' title='download as org-mode text'> source </a> \
+							<a href=\"/$$post_pdf\" target=_blank class=post-download-link title='download as pdf'> pdf </a> \
+							<a href=\"/$$post_text\" target=_blank class=post-download-link title='download as text'> text </a> \
+							<a href=\"/$$post_src\" target=_blank class=post-download-link title='download as org-mode text'> source </a> \
 					</li>" >> index.html; \
 	done
 
