@@ -14,10 +14,9 @@ node_modules:
 
 css/%.css: node_modules src/stylus/%.styl
 	-mkdir css/
-	stylus --compress src/stylus/ --out css/
+	stylus src/stylus/ --out css/
 	rm css/_*.css # remove compiled partials
-	sqwish "$@" # makes 'filename.min.css'
-	mv "$(basename $@).min.css" "$@"
+	myth "$@" "$@" --compress
 
 js/app.js: node_modules $(COFFEESCRIPT)
 	-mkdir js/

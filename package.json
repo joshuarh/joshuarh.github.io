@@ -4,7 +4,7 @@
   "main": "index.html",
   "devDependencies": {
     "coffee-script": "latest",
-    "sqwish": "latest",
+    "myth": "latest",
     "stylus": "latest",
     "uglify-js": "latest"
   },
