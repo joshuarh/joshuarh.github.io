@@ -9,6 +9,7 @@ Bf-l
 yit
 :new
 P
+:bnext
 :only!
 :" org-export-to-file escapes html entities
 :silent! %s/&amp;/\&/g
