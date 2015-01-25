@@ -5,8 +5,9 @@ qq
 f"
 "iyi"
 vit
+o
 
-a <a href=#i class=anchor-link title="Link to this section">⚓</a>
+i<a href=#i class=anchor-link title="Link to this section">#</a> 
 @q
 q
 @q
