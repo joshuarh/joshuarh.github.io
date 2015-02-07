@@ -1,3 +1,4 @@
+#+title: Shell Tricks
 Here are some ways to speed up your shell use and make using a terminal more
 enjoyable. Depending on what you're working on, your mileage may vary, so change
 and adapt this stuff until you're comfortable.

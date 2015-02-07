@@ -1,3 +1,4 @@
+#+title: Put Vim on Autopilot
 I'm always looking for ways make development easier, and [[https://speakerdeck.com/holman/unsucking-your-teams-development-environment][making computers do the
 work]] is my favorite way of getting to the fun stuff: development.  Though the
 following won't do your job for you, here are some tips for getting vim to do
