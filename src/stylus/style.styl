@@ -1,5 +1,7 @@
 @require _pygments
 
+largest-width = 740px
+
 // generic {{{
 
 body
@@ -7,7 +9,7 @@ body
   font-size 1.1em
   line-height 1.6em
   margin 0 auto
-  max-width 740px
+  max-width largest-width
   position relative
 
 ol, ul
@@ -29,7 +31,7 @@ a
 
 footer
   margin 0 auto 25px
-  max-width 900px
+  max-width largest-width
 
   ul
     margin 0
@@ -43,9 +45,6 @@ footer
 // load and that shouldn't be transitioned)
 .transition-background-color
   transition 0.2s ease background-color
-
-#posts-header
-  margin 15px auto 30px
 
 #posts
   margin-bottom 30px
@@ -86,7 +85,7 @@ code, .org-src-container
 iframe[id^=asciicast-iframe]
   margin 0 auto !important
 
-.date, .post-download-link
+.date, .post-download-link, footer
   font-size 0.9em
 
 .date
@@ -102,7 +101,7 @@ iframe[id^=asciicast-iframe]
 
 // dynamic layout {{{
 
-@media (min-width: 740px)
+@media (min-width: largest-width)
   footer ul
     column-count 2
     column-gap 30px
@@ -116,7 +115,7 @@ iframe[id^=asciicast-iframe]
   body
     padding 0 25px
 
-@media (max-width: 740px)
+@media (max-width: largest-width)
   footer ul
     column-count 2
     column-gap 30px
