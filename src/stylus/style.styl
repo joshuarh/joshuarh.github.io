@@ -4,14 +4,11 @@
 
 body
   font-family sans-serif
-  font-size 1.4rem
-  line-height 2rem
+  font-size 1.1em
+  line-height 1.6em
   margin 0 auto
-  max-width 900px
+  max-width 740px
   position relative
-
-h1, h2, h3, h4, h5, h6
-  line-height 1.4em
 
 ol, ul
   padding-left 25px
@@ -33,7 +30,6 @@ a
 footer
   margin 0 auto 25px
   max-width 900px
-  font-size 1.2rem
 
   ul
     margin 0
@@ -41,56 +37,6 @@ footer
     text-align center
 
 // }}} generic
-
-// dynamic layout {{{
-
-@media (min-width: 900px)
-  footer ul
-    column-count 2
-    column-gap 30px
-
-  //FIXME enable when you write more posts
-
-  // #posts
-  //   column-count 3
-  //   column-gap 30px
-
-  body
-    padding 0 25px
-
-@media (max-width: 900px)
-  footer ul
-    column-count 2
-    column-gap 30px
-
-  //FIXME enable when you write more posts
-
-  // #posts
-  //   column-count 2
-  //   column-gap 30px
-
-  body
-    padding 0 20px
-
-@media (max-width: 700px)
-  footer ul
-    column-count 1
-    column-gap 30px
-
-  //FIXME enable when you write more posts
-
-  // #posts
-  //   column-count 1
-  //   column-gap 30px
-
-  body
-    padding 0 10px
-
-  // don't indent lists quite as much for very small screens
-  ol, ul
-    padding-left 20px
-
-// }}} dynamic layout
 
 // this class is added by javascript so the background color isn't
 // transitioned on page load (the background color might be changed on page
@@ -100,11 +46,9 @@ footer
 
 #posts-header
   margin 15px auto 30px
-  font-size 2rem
 
 #posts
   margin-bottom 30px
-  padding 0
 
 #posts, footer ul
   column-rule 1px dotted
@@ -143,17 +87,17 @@ code, .org-src-container
   padding 5px
   margin 0 3px
 
-.date
-  display block
-
-.date, .post-download-link
-  font-size 1.1rem
-
 .highlight
   overflow-x auto
 
 iframe[id^=asciicast-iframe]
   margin 0 auto !important
+
+.date, .post-download-link
+  font-size 0.9em
+
+.date
+  display block
 
 .post-download-link
   display none
@@ -162,6 +106,56 @@ iframe[id^=asciicast-iframe]
 .show-download-links
   .post-download-link
     display inline-block
+
+// dynamic layout {{{
+
+@media (min-width: 740px)
+  footer ul
+    column-count 2
+    column-gap 30px
+
+  //FIXME enable when you write more posts
+
+  // #posts
+  //   column-count 3
+  //   column-gap 30px
+
+  body
+    padding 0 25px
+
+@media (max-width: 740px)
+  footer ul
+    column-count 2
+    column-gap 30px
+
+  //FIXME enable when you write more posts
+
+  // #posts
+  //   column-count 2
+  //   column-gap 30px
+
+  body
+    padding 0 20px
+
+@media (max-width: 560px)
+  footer ul
+    column-count 1
+    column-gap 30px
+
+  //FIXME enable when you write more posts
+
+  // #posts
+  //   column-count 1
+  //   column-gap 30px
+
+  body
+    padding 0 10px
+
+  // don't indent lists quite as much for very small screens
+  ol, ul
+    padding-left 20px
+
+// }}} dynamic layout
 
 // solarized colorscheme {{{
 
