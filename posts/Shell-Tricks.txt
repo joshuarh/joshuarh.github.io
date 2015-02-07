@@ -407,5 +407,11 @@ Conclusion
   twitter (link at the bottom), and [my setup] is open source, so fork
   away!
 
+  /This work is licensed under a [Creative Commons
+  Attribution-ShareAlike 4.0 International License]./
+
 
   [my setup] https://github.com/losingkeys/dotfiles/
+
+  [Creative Commons Attribution-ShareAlike 4.0 International License]
+  http://creativecommons.org/licenses/by-sa/4.0/

@@ -92,3 +92,6 @@ autocmd FileType markdown,gitcommit,cucumber setlocal spell " spellcheck these f
 * Conclusion
   Though your editor still isn't an automatic code-producing robot, it should
   feel a little more automated than before.
+
+  /This work is licensed under a [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons Attribution-ShareAlike 4.0
+  International License]]./

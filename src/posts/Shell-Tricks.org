@@ -216,3 +216,6 @@ g h commit
   I hope you've learned something that will make you more productive. If you
   have any comments on the post, or shell tips for me, I'm on twitter (link at
   the bottom), and [[https://github.com/losingkeys/dotfiles/][my setup]] is open source, so fork away!
+
+  /This work is licensed under a [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons Attribution-ShareAlike 4.0
+  International License]]./
